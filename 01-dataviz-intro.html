@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introduction à la data visualisation</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Antoine Neuraz" />
+    <script src="libs/header-attrs-2.16/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/my_style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+class: center, middle, title
+
+# UE Visualisation
+
+### 2022-2023
+
+## Dr. Antoine Neuraz
+
+### PHU Informatique médicale
+#### Hôpital Necker-Enfants malades, &lt;/br&gt; Université Paris Cité
+
+---
+class: center, middle
+
+![](img/usmap_old.png)
+
+---
+class: center, middle
+
+![](img/usmap_new.png)
+
+---
+class: center, middle
+
+&lt;video &gt;
+&lt;source src="img/usmap_video.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+
+
+---
+class: center, middle
+# 2 Objectifs principaux
+
+### **Principes généraux** de visualisation
+--
+
+### **Application** à l'aide de R et ggplot2
+
+---
+class: center, middle
+# Organisation des cours
+
+### 1ère moitié du cours: théorie
+
+### 2ème moitié du cours: mise en pratique
+
+---
+class: center, middle
+# Evaluation par projet en binôme
+
+### Mardi après-midi: description du projet
+
+### Soutenance le vendredi **25 novembre** matin
+
+---
+
+# Visualisation
+
+.pull-left[![:scale 100%](img/visualisation.jpg)]
+
+.pull-right[
+
+#### 1. Action de rendre visible d'une façon matérielle l'action et les effets d'un phénomène.
+
+#### 2. Présentation visuelle sur un écran, sous forme d'image alphanumérique ou graphique, d'un ensemble d'informations traitées par des moyens informatiques.
+]
+
+---
+class: center, middle
+
+# Pourquoi visualiser ?
+
+---
+
+# Pourquoi visualiser graphiquement ?
+
+.pull-left[
+
+#### **Plus riches** : plus d’information en moins d’espace
+
+#### Rend la **structure plus visible**
+
+#### **Plus accessible**
+
+#### **Plus rapide** à appréhender
+
+#### **Plus mémorable**
+
+]
+
+.pull-right[
+
+![](img/bandwidth.png)
+
+]
+
+---
+
+class: left
+
+# Pourquoi mettre un ordinateur dans la boucle ?
+&lt;/br&gt;
+
+## **Passage à l’échelle**
+--
+
+## **Efficience**: réutilisation, diffusion 
+
+--
+## **Qualité** et **précision**
+
+---
+# Pourquoi mettre un humain dans la boucle ?
+
+![:abs 85%, 7%, 26%](img/humanVScomputer.png)
+
+---
+class: center, middle
+
+# Buts d'une visualisation
+
+--
+
+.pull-c1[
+### Enregistrer l'information
+
+]
+
+--
+
+.pull-c2[
+### Analyser
+
+]
+
+--
+
+.pull-c3[
+### Communiquer
+]
+
+
+---
+class: center
+
+# Enregistrer l'information
+
+.pull-left[
+![](img/carte-plan-paris.jpg)
+]
+
+.pull-right[
+![](img/ancien-photo.jpg)
+]
+
+---
+class: center, full
+# Analyser
+
+.pull-left[
+![](img/higlass.png)
+[https://higlass.io/]()
+]
+.pull-right[
+![](img/stratomex_explained.png)
+[https://frama.link/stratomex]()
+]
+
+---
+class: center, full
+# Communiquer
+
+.pull-left[
+![](img/wind-map.png)
+[http://hint.fm/wind/]()
+]
+
+.pull-right[
+![:scale 70%](img/us-dendro.png)
+[https://frama.link/dendro]()
+]
+
+---
+
+class: center, middle
+
+# Définition
+
+### La visualisation est le processus qui **transforme** les données en **représentation graphique** interactive à des fins d’ **exploration**, de **confirmation** ou de **communication**.
+
+
+---
+
+# Pourquoi ne pas se limiter aux statistiques ?
+
+![:abs 80%, 10%, 26%](img/anscombe-stat.png)
+
+---
+
+# Anscombe's quartet 
+
+![:abs 85%, 7%, 20%](img/anscombe-viz.png)
+
+---
+
+# Datasaurus dozen 
+
+![:abs 85%, 7%, 18%](img/datasaurus.png)
+
+---
+
+class: center
+
+## Un peu d'histoire: enregistrer
+
+.pull-left[
+![:scale 90%](img/davinci.png)
+
+Da Vinci (1500)
+]
+
+.pull-right[
+![:scale 90%](img/galilee.png)
+
+Galilée (1616)
+]
+
+---
+class: center
+# Un peu d'histoire: analyser
+
+![:scale 90%](img/playfair.png)
+
+### Playfair(1786)
+
+---
+class: center
+# Un peu d'histoire: trouver des patterns
+
+![:scale 60%](img/snow.png)
+
+### John Snow (1854)
+
+---
+class: center, full
+
+# Communiquer
+
+![:scale 100%](img/minard.png)
+
+### Minard(1869)
+
+---
+# 1 second of internet
+![:scale 80%](img/1second.png)
+[https://www.internetlivestats.com/one-second/]()
+
+---
+class: center
+# London Tube 1927
+
+![:scale 80%](img/tube1927.png)
+
+
+---
+class: center
+# London Tube 1933
+
+![:scale 80%](img/tube1933.png)
+
+
+---
+class: center
+# London Tube today
+
+![:scale 90%](img/tubetoday.png)
+
+---
+class: center, middle, inverse
+
+# Types de datasets 
+
+---
+class: center, middle, full
+
+![](img/dataset_types2.png)
+
+---
+class: center, full
+## Caractéristiques des données de tableau
+
+![:scale 100%](img/donnees_tableau.png)
+---
+
+# Autres caractéristiques des données 
+
+### **Liens** : relation entre 2 entités (observations, noeuds)
+
+--
+
+### **Positions** (données spatiales)
+
+--
+
+### **Grilles** (grids) : stratégie d'échantillonage de données continues
+
+
+---
+class: center, full
+# Types de variables (attributs)
+
+![](img/types_variables1.png)
+
+--
+
+![](img/types_variables2.png)
+
+---
+# Variables quantitatives
+
+
+### **Intervalles** = zéro arbitraire
+
+ex: Dates, positions géographiques 
+
+&amp;rightarrow; pas de comparaison directe (cf °C et °F)
+
+&amp;rightarrow; seulement des différences 
+
+--
+
+### **Ratios** = zero absolu
+
+ex: longueur, masse 
+
+&amp;rightarrow; ratios et proportions
+
+---
+class: center, middle
+
+### Comment peut-on représenter visuellement 2 nombres, par exemple: 
+
+### **4 et 8**
+
+---
+class: center, middle, inverse
+
+# Marques et échelles 
+
+---
+# Marques et échelles
+
+## **Marques** = geometry
+
+### Représente les **observations** (items) ou les liens 
+
+--
+&lt;/br&gt;
+## **Echelles** = scales 
+
+### Change l'**apparence** des marques en fonction de **variables** (attributs)
+
+---
+# Marques pour observations
+
+## Eléments géométriques de base
+
+![](img/marques.png)
+
+--
+## Marques 3D: Volume (rarement utilisé)
+
+---
+class: center, middle, full
+![](img/marques_liens.png)
+
+---
+class: center, full
+# **Echelles** (= variables visuelles)
+
+![:scale 65%](img/echelles.png)
+
+### Contrôle l'apparence proportionnellement ou en fonction de variables
+
+---
+# Utiliser les marques et les échelles 
+
+.pull-left[
+
+![](01-dataviz-intro_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+]
+
+--
+.pull-right[
+### **Marque**: ligne
+### **Echelles**: longueur et position
+
+### **Variables**
+
+#### 1 variable quantitative
+
+#### 1 variable qualitative
+]
+
+---
+
+# Utiliser les marques et les échelles 
+
+.pull-left[
+
+![](01-dataviz-intro_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+]
+
+--
+.pull-right[
+### **Marque**: point
+### **Echelles**: position x et position y
+
+### **Variables**
+
+#### **2** variables quantitatives
+
+]
+
+---
+
+# Utiliser les marques et les échelles 
+
+.pull-left[
+
+![](01-dataviz-intro_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+]
+
+--
+.pull-right[
+### **Marque**: point
+### **Echelles**: position x et position y
+
+### **Variables**
+
+#### 2 variables quantitatives
+#### **1** variable qualitative
+
+]
+
+---
+
+# Utiliser les marques et les échelles 
+
+.pull-left[
+
+![](01-dataviz-intro_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+]
+
+--
+.pull-right[
+### **Marque**: point
+### **Echelles**: position x et position y
+
+### **Variables**
+
+#### **3** variables quantitatives
+#### 1 variable qualitative
+
+]
+
+---
+class: center
+# Encodage redondant
+
+![](01-dataviz-intro_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+
+### Longueur, position et Luminosité
+
+---
+class: center
+## Toutes les échelles ne naissent pas égales
+
+.pull-left[
+### **Echelles de magnitudes**
+
+#### Combien ?
+]
+
+--
+.pull-right[
+### **Echelles d'identité**
+
+#### Quoi? Où?
+
+]
+
+---
+class: center
+## Toutes les échelles ne naissent pas égales
+
+.pull-left[
+### **Echelles de magnitudes**
+
+#### Combien ?
+
+Position 
+
+Longueur
+
+Saturation
+
+...
+
+#### **Données quantitatives**
+]
+
+--
+.pull-right[
+### **Echelles d'identité**
+
+#### Quoi? Où?
+
+Forme
+
+Teinte
+
+Région spatiale 
+
+...
+
+#### **Données qualitatives**
+]
+
+---
+class: center, full
+
+## Echelles - efficience
+![:scale 90%](img/echelles_efficience.png)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="addons/macros.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "4:3",
+"countIncrementalSlides": false,
+"self-contained": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

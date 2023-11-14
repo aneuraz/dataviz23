@@ -1,0 +1,602 @@
+---
+title: "Introduction à la data visualisation"
+author: "Antoine Neuraz"
+date: "15/11/2022"
+output: 
+  xaringan::moon_reader:
+    css: ['default','css/my_style.css']
+    lib_dir: libs
+    seal: false
+    nature:
+      ratio: '4:3'
+      countIncrementalSlides: false
+      self-contained: true
+      beforeInit: "addons/macros.js"
+---
+
+```{r, include = FALSE}
+library(ggplot2)
+library(dplyr)
+```
+
+class: center, middle, title
+
+# UE Visualisation
+
+### 2022-2023
+
+## Dr. Antoine Neuraz
+
+### PHU Informatique médicale
+#### Hôpital Necker-Enfants malades, </br> Université Paris Cité
+
+---
+class: center, middle
+
+![](img/usmap_old.png)
+
+---
+class: center, middle
+
+![](img/usmap_new.png)
+
+---
+class: center, middle
+
+<video >
+<source src="img/usmap_video.mp4" type="video/mp4">
+</video>
+
+
+---
+class: center, middle
+# 2 Objectifs principaux
+
+### **Principes généraux** de visualisation
+--
+
+### **Application** à l'aide de R et ggplot2
+
+---
+class: center, middle
+# Organisation des cours
+
+### 1ère moitié du cours: théorie
+
+### 2ème moitié du cours: mise en pratique
+
+---
+class: center, middle
+# Evaluation par projet en binôme
+
+### Mardi après-midi: description du projet
+
+### Soutenance le vendredi **25 novembre** matin
+
+---
+
+# Visualisation
+
+.pull-left[![:scale 100%](img/visualisation.jpg)]
+
+.pull-right[
+
+#### 1. Action de rendre visible d'une façon matérielle l'action et les effets d'un phénomène.
+
+#### 2. Présentation visuelle sur un écran, sous forme d'image alphanumérique ou graphique, d'un ensemble d'informations traitées par des moyens informatiques.
+]
+
+---
+class: center, middle
+
+# Pourquoi visualiser ?
+
+---
+
+# Pourquoi visualiser graphiquement ?
+
+.pull-left[
+
+#### **Plus riches** : plus d’information en moins d’espace
+
+#### Rend la **structure plus visible**
+
+#### **Plus accessible**
+
+#### **Plus rapide** à appréhender
+
+#### **Plus mémorable**
+
+]
+
+.pull-right[
+
+![](img/bandwidth.png)
+
+]
+
+---
+
+class: left
+
+# Pourquoi mettre un ordinateur dans la boucle ?
+</br>
+
+## **Passage à l’échelle**
+--
+
+## **Efficience**: réutilisation, diffusion 
+
+--
+## **Qualité** et **précision**
+
+---
+# Pourquoi mettre un humain dans la boucle ?
+
+![:abs 85%, 7%, 26%](img/humanVScomputer.png)
+
+---
+class: center, middle
+
+# Buts d'une visualisation
+
+--
+
+.pull-c1[
+### Enregistrer l'information
+
+]
+
+--
+
+.pull-c2[
+### Analyser
+
+]
+
+--
+
+.pull-c3[
+### Communiquer
+]
+
+
+---
+class: center
+
+# Enregistrer l'information
+
+.pull-left[
+![](img/carte-plan-paris.jpg)
+]
+
+.pull-right[
+![](img/ancien-photo.jpg)
+]
+
+---
+class: center, full
+# Analyser
+
+.pull-left[
+![](img/higlass.png)
+[https://higlass.io/]()
+]
+.pull-right[
+![](img/stratomex_explained.png)
+[https://frama.link/stratomex]()
+]
+
+---
+class: center, full
+# Communiquer
+
+.pull-left[
+![](img/wind-map.png)
+[http://hint.fm/wind/]()
+]
+
+.pull-right[
+![:scale 70%](img/us-dendro.png)
+[https://frama.link/dendro]()
+]
+
+---
+
+class: center, middle
+
+# Définition
+
+### La visualisation est le processus qui **transforme** les données en **représentation graphique** interactive à des fins d’ **exploration**, de **confirmation** ou de **communication**.
+
+
+---
+
+# Pourquoi ne pas se limiter aux statistiques ?
+
+![:abs 80%, 10%, 26%](img/anscombe-stat.png)
+
+---
+
+# Anscombe's quartet 
+
+![:abs 85%, 7%, 20%](img/anscombe-viz.png)
+
+---
+
+# Datasaurus dozen 
+
+![:abs 85%, 7%, 18%](img/datasaurus.png)
+
+---
+
+class: center
+
+## Un peu d'histoire: enregistrer
+
+.pull-left[
+![:scale 90%](img/davinci.png)
+
+Da Vinci (1500)
+]
+
+.pull-right[
+![:scale 90%](img/galilee.png)
+
+Galilée (1616)
+]
+
+---
+class: center
+# Un peu d'histoire: analyser
+
+![:scale 90%](img/playfair.png)
+
+### Playfair(1786)
+
+---
+class: center
+# Un peu d'histoire: trouver des patterns
+
+![:scale 60%](img/snow.png)
+
+### John Snow (1854)
+
+---
+class: center, full
+
+# Communiquer
+
+![:scale 100%](img/minard.png)
+
+### Minard(1869)
+
+---
+# 1 second of internet
+![:scale 80%](img/1second.png)
+[https://www.internetlivestats.com/one-second/]()
+
+---
+class: center
+# London Tube 1927
+
+![:scale 80%](img/tube1927.png)
+
+
+---
+class: center
+# London Tube 1933
+
+![:scale 80%](img/tube1933.png)
+
+
+---
+class: center
+# London Tube today
+
+![:scale 90%](img/tubetoday.png)
+
+---
+class: center, middle, inverse
+
+# Types de datasets 
+
+---
+class: center, middle, full
+
+![](img/dataset_types2.png)
+
+---
+class: center, full
+## Caractéristiques des données de tableau
+
+![:scale 100%](img/donnees_tableau.png)
+---
+
+# Autres caractéristiques des données 
+
+### **Liens** : relation entre 2 entités (observations, noeuds)
+
+--
+
+### **Positions** (données spatiales)
+
+--
+
+### **Grilles** (grids) : stratégie d'échantillonage de données continues
+
+
+---
+class: center, full
+# Types de variables (attributs)
+
+![](img/types_variables1.png)
+
+--
+
+![](img/types_variables2.png)
+
+---
+# Variables quantitatives
+
+
+### **Intervalles** = zéro arbitraire
+
+ex: Dates, positions géographiques 
+
+&rightarrow; pas de comparaison directe (cf °C et °F)
+
+&rightarrow; seulement des différences 
+
+--
+
+### **Ratios** = zero absolu
+
+ex: longueur, masse 
+
+&rightarrow; ratios et proportions
+
+---
+class: center, middle
+
+### Comment peut-on représenter visuellement 2 nombres, par exemple: 
+
+### **4 et 8**
+
+---
+class: center, middle, inverse
+
+# Marques et échelles 
+
+---
+# Marques et échelles
+
+## **Marques** = geometry
+
+### Représente les **observations** (items) ou les liens 
+
+--
+</br>
+## **Echelles** = scales 
+
+### Change l'**apparence** des marques en fonction de **variables** (attributs)
+
+---
+# Marques pour observations
+
+## Eléments géométriques de base
+
+![](img/marques.png)
+
+--
+## Marques 3D: Volume (rarement utilisé)
+
+---
+class: center, middle, full
+![](img/marques_liens.png)
+
+---
+class: center, full
+# **Echelles** (= variables visuelles)
+
+![:scale 65%](img/echelles.png)
+
+### Contrôle l'apparence proportionnellement ou en fonction de variables
+
+---
+# Utiliser les marques et les échelles 
+
+.pull-left[
+
+```{r,echo = FALSE}
+dt <- data.frame(x = c(1,2,3),
+                 y = c(4, 2, 5), 
+                 group = c('A','A', 'B'), 
+                 size = c(1,5,7), 
+                 cat = c('A','B','C'))
+
+ggplot(data=dt, aes(x=cat, y=y)) +
+  geom_col() + 
+  theme_void() + 
+  theme(axis.line = element_line(size = 1))
+```
+]
+
+--
+.pull-right[
+### **Marque**: ligne
+### **Echelles**: longueur et position
+
+### **Variables**
+
+#### 1 variable quantitative
+
+#### 1 variable qualitative
+]
+
+---
+
+# Utiliser les marques et les échelles 
+
+.pull-left[
+
+```{r,echo = FALSE}
+
+ggplot(data=dt, aes(x=x, y=y)) +
+  geom_point(size = 5) + 
+  xlim(c(0,4)) + 
+  ylim(c(0,7)) +
+  theme_void() + 
+  theme(axis.line = element_line(size = 1))
+```
+]
+
+--
+.pull-right[
+### **Marque**: point
+### **Echelles**: position x et position y
+
+### **Variables**
+
+#### **2** variables quantitatives
+
+]
+
+---
+
+# Utiliser les marques et les échelles 
+
+.pull-left[
+
+```{r,echo = FALSE}
+
+ggplot(data=dt, aes(x=x, y=y, color = group)) +
+  geom_point(size = 5) + 
+  xlim(c(0,4)) + 
+  ylim(c(0,7)) +
+  theme_void() + 
+  theme(axis.line = element_line(size = 1),
+        legend.position = 'none')
+```
+]
+
+--
+.pull-right[
+### **Marque**: point
+### **Echelles**: position x et position y
+
+### **Variables**
+
+#### 2 variables quantitatives
+#### **1** variable qualitative
+
+]
+
+---
+
+# Utiliser les marques et les échelles 
+
+.pull-left[
+
+```{r,echo = FALSE}
+
+ggplot(data=dt, aes(x=x, y=y, color=group, size = size)) +
+  geom_point() + 
+  xlim(c(0,4)) + 
+  ylim(c(0,7)) +
+  theme_void() + 
+  theme(axis.line = element_line(size = 1), 
+        legend.position = "none")
+```
+]
+
+--
+.pull-right[
+### **Marque**: point
+### **Echelles**: position x et position y
+
+### **Variables**
+
+#### **3** variables quantitatives
+#### 1 variable qualitative
+
+]
+
+---
+class: center
+# Encodage redondant
+
+```{r,echo = FALSE, fig.asp= .7, fig.height= 6}
+
+dt = data.frame(x=c(1,2,3,4),
+                y=c(1,2,3,4))
+
+ggplot(data=dt, aes(x=x, y=y, fill=y)) +
+  geom_col() + 
+  theme_void() + 
+  theme(axis.line = element_blank(), 
+        legend.position = "none")
+```
+
+### Longueur, position et Luminosité
+
+---
+class: center
+## Toutes les échelles ne naissent pas égales
+
+.pull-left[
+### **Echelles de magnitudes**
+
+#### Combien ?
+]
+
+--
+.pull-right[
+### **Echelles d'identité**
+
+#### Quoi? Où?
+
+]
+
+---
+class: center
+## Toutes les échelles ne naissent pas égales
+
+.pull-left[
+### **Echelles de magnitudes**
+
+#### Combien ?
+
+Position 
+
+Longueur
+
+Saturation
+
+...
+
+#### **Données quantitatives**
+]
+
+--
+.pull-right[
+### **Echelles d'identité**
+
+#### Quoi? Où?
+
+Forme
+
+Teinte
+
+Région spatiale 
+
+...
+
+#### **Données qualitatives**
+]
+
+---
+class: center, full
+
+## Echelles - efficience
+![:scale 90%](img/echelles_efficience.png)
