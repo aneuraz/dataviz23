@@ -1,0 +1,153 @@
+body {font-family: 'Helvetica'}
+
+.remark-slide-content h1 {
+  font-size: 55px;
+  font-weight: 100;
+  text-align: center;
+  margin-bottom: 1em;
+  
+}
+
+
+.remark-slide-content > h4,.pull-left > h4, .pull-right > h4, .pull-c1 > h4, .pull-c2 > h4, .pull-c3 >h4 {
+  font-size: 25px;
+  border-top: 0 solid #00000;
+  font-weight: 200;
+}
+
+.remark-slide-content > h3, .pull-left > h3, .pull-right > h3, .pull-c1 > h3, .pull-c2 > h3, .pull-c3 >h3 {
+  font-size: 30px;
+  font-weight:100;
+}
+
+.remark-slide-content > h2, .pull-left > h2, .pull-right > h2, .pull-c1 > h2, .pull-c2 > h2, .pull-c3 >h2 {
+  font-size: 40px;
+  font-weight:100;
+}
+
+.title-slide {
+  background: #fafafa; /* Old browsers */
+background: -moz-linear-gradient(top, #fafafa 0%, #fafafa 0%, #ffffff 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #fafafa 0%,#fafafa 0%,#ffffff 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #fafafa 0%,#fafafa 0%,#ffffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+.inline > img {
+  width: 30px;
+  height: 30px;
+  vertical-align:middle;
+}
+
+
+.effect1{
+    -webkit-box-shadow: 0 10px 6px -6px #777;
+       -moz-box-shadow: 0 10px 6px -6px #777;
+            box-shadow: 0 10px 6px -6px #777;
+}
+
+
+.box h3{
+    text-align:center;
+    padding: 10px;
+
+}
+.box {
+    width:85%;
+    background:#FFF;
+    margin:40px auto;
+}
+
+.subtitle h4{
+    text-align:center;
+    padding: 10px;
+
+}
+
+.subtitle h5{
+    text-align:center;
+    padding: 10px;
+    font-weight: 300;
+
+} 
+
+.subtitle {
+    padding-top: 30px;
+    width:85%;
+    margin:40px auto;
+}
+
+.logos{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  bottom: 30px;
+  left: 0px;
+
+  
+}
+
+.logos > div{
+  flex-direction: row;
+  
+  flex-grow: 1;
+  
+}
+
+.logos > div > img {
+  margin:auto;
+ height: 60px;
+ display: block;
+ margin:auto;
+ 
+ 
+}
+
+.center > h2, .center > h3, .center > h4, .center > h5 {
+  text-align:center;
+
+}
+
+.pull-left {
+  float: left;
+  width: 49%;
+}
+.pull-right {
+  float: right;
+  width: 49%;
+}
+.pull-right ~ * {
+  clear: both;
+}
+
+
+.pull-c1 {
+  float:left;
+  width: 31%;
+}
+
+.pull-c2 {
+  float:left;
+  width: 31%;
+}
+
+.pull-c3 {
+  float:right;
+  width: 31%;
+}
+
+.pull-c3 ~ *  {
+  clear: both;
+}
+
+.full  {
+  padding: 1em 1em 1em 1em;
+}
+
+.small .remark-code {
+  font-size: 70%;
+}
+
+.tiny .remark-code {
+  font-size: 40%;
+}
